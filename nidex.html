@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>创想科技 - 企业网站</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --secondary: #4f46e5;
+            --accent: #10b981;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --gray: #94a3b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 导航栏 */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--light);
+            text-decoration: none;
+        }
+
+        .logo i {
+            color: var(--accent);
+            margin-right: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: var(--secondary);
+            color: var(--light);
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .btn:hover {
+            background: transparent;
+            border-color: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border-color: var(--secondary);
+        }
+
+        .btn-outline:hover {
+            background: var(--secondary);
+        }
+
+        /* 移动端导航 */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background: var(--light);
+            margin: 2px 0;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        /* 横幅区域 */
+        .hero {
+            padding: 160px 0 100px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            letter-spacing: -1px;
+            background: linear-gradient(to right, #9d50bb, #6e48aa, #4f46e5);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+            color: var(--gray);
+        }
+
+        /* 服务部分 */
+        .services {
+            padding: 100px 0;
+            background: rgba(15, 23, 42, 0.5);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: rgba(30, 41, 59, 0.6);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(79, 70, 229, 0.5);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            background: rgba(79, 70, 229, 0.1);
+            border-radius: 50%;
+            font-size: 2rem;
+            color: var(--secondary);
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        /* 项目部分 */
+        .projects {
+            padding: 100px 0;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .project-img {
+            height: 250px;
+            background: linear-gradient(45deg, #7e22ce, #3b82f6);
+            position: relative;
+        }
+
+        .project-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+
+        .project-info {
+            padding: 25px;
+            background: rgba(30, 41, 59, 0.6);
+        }
+
+        /* 统计部分 */
+        .stats {
+            padding: 80px 0;
+            background: rgba(15, 23, 42, 0.7);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+
+        /* 团队成员 */
+        .team {
+            padding: 100px 0;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .team-member {
+            text-align: center;
+            position: relative;
+        }
+
+        .member-image {
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 5px solid rgba(79, 70, 229, 0.3);
+        }
+
+        .member-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .team-member:hover .member-image img {
+            transform: scale(1.1);
+        }
+
+        .member-social {
+            position: absolute;
+            bottom: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .team-member:hover .member-social {
+            bottom: 85px;
+            opacity: 1;
+        }
+
+        .member-social a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            background: var(--secondary);
+            color: var(--light);
+            border-radius: 50%;
+            margin: 0 5px;
+            transition: all 0.3s ease;
+        }
+
+        .member-social a:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        /* 联系表单 */
+        .contact {
+            padding: 100px 0;
+            background: rgba(15, 23, 42, 0.5);
+        }
+
+        .contact-form {
+            max-width: 700px;
+            margin: 0 auto;
+            background: rgba(30, 41, 59, 0.6);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px 20px;
+            background: rgba(15, 23, 42, 0.5);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: var(--light);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--secondary);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* 页脚 */
+        footer {
+            background: var(--dark);
+            padding: 70px 0 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h3 {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--accent);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+            padding-left: 5px;
+        }
+
+        .footer-links i {
+            margin-right: 10px;
+            width: 20px;
+        }
+
+        .social-icons {
+            display: flex;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--light);
+            border-radius: 50%;
+            margin-right: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--gray);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3.2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 80px;
+                left: 0;
+                background: var(--dark);
+                width: 100%;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+                transition: clip-path 0.4s ease;
+            }
+
+            .nav-links.active {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            }
+
+            .nav-links li {
+                margin: 15px 0;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero {
+                padding: 140px 0 80px;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+        }
+
+        /* 动画类 */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.appear {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">
+                    <i class="fas fa-rocket"></i>
+                    <span>创想科技</span>
+                </a>
+                
+                <ul class="nav-links">
+                    <li><a href="#home">首页</a></li>
+                    <li><a href="#services">服务</a></li>
+                    <li><a href="#projects">项目</a></li>
+                    <li><a href="#team">团队</a></li>
+                    <li><a href="#contact">联系</a></li>
+                </ul>
+                
+                <a href="#contact" class="btn">联系我们</a>
+                
+                <div class="menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 主横幅区域 -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>创新科技 驱动未来</h1>
+            <p>我们致力于为企业提供最前沿的数字化解决方案，帮助您在竞争激烈的市场中脱颖而出</p>
+            <a href="#services" class="btn">了解更多</a>
+            <a href="#contact" class="btn btn-outline">联系我们</a>
+        </div>
+    </section>
+
+    <!-- 服务部分 -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>我们的服务</h2>
+                <p>我们提供全面的科技解决方案，满足您的业务需求</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>网站开发</h3>
+                    <p>定制化网站和Web应用开发，提供卓越的用户体验和性能优化。</p>
+                </div>
+                
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>移动应用</h3>
+                    <p>跨平台移动应用开发，支持iOS和Android系统，覆盖更广泛用户群。</p>
+                </div>
+                
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>数字营销</h3>
+                    <p>全面的数字营销策略，提升品牌曝光度和转化率，促进业务增长。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 项目展示 -->
+    <section class="projects" id="projects">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>成功项目</h2>
+                <p>探索我们为客户打造的创新解决方案</p>
+            </div>
+            
+            <div class="projects-grid">
+                <div class="project-card fade-in">
+                    <div class="project-img">
+                        <div class="project-overlay">
+                            <a href="#" class="btn">查看详情</a>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>企业电子商务平台</h3>
+                        <p>为大型零售企业打造的全渠道电商解决方案</p>
+                    </div>
+                </div>
+                
+                <div class="project-card fade-in">
+                    <div class="project-img">
+                        <div class="project-overlay">
+                            <a href="#" class="btn">查看详情</a>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>智能健康管理系统</h3>
+                        <p>医疗健康领域的创新SaaS平台</p>
+                    </div>
+                </div>
+                
+                <div class="project-card fade-in">
+                    <div class="project-img">
+                        <div class="project-overlay">
+                            <a href="#" class="btn">查看详情</a>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>智能家居解决方案</h3>
+                        <p>全屋智能控制与能源管理平台</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 统计数据 -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item fade-in">
+                    <h3>250+</h3>
+                    <p>完成项目</p>
+                </div>
+                
+                <div class="stat-item fade-in">
+                    <h3>98%</h3>
+                    <p>客户满意度</p>
+                </div>
+                
+                <div class="stat-item fade-in">
+                    <h3>50+</h3>
+                    <p>专业团队</p>
+                </div>
+                
+                <div class="stat-item fade-in">
+                    <h3>12年</h3>
+                    <p>行业经验</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 团队成员 -->
+    <section class="team" id="team">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>核心团队</h2>
+                <p>认识我们的专业团队成员</p>
+            </div>
+            
+            <div class="team-grid">
+                <div class="team-member fade-in">
+                    <div class="member-image">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80" alt="团队成员">
+                    </div>
+                    <h3>张伟</h3>
+                    <p>技术总监</p>
+                    <div class="member-social">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                
+                <div class="team-member fade-in">
+                    <div class="member-image">
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=400&q=80" alt="团队成员">
+                    </div>
+                    <h3>李娜</h3>
+                    <p>设计总监</p>
+                    <div class="member-social">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-dribbble"></i></a>
+                    </div>
+                </div>
+                
+                <div class="team-member fade-in">
+                    <div class="member-image">
+                        <img src="https://images.unsplash.com/photo-1556157382-97eda2f4e92f?auto=format&fit=crop&w=400&q=80" alt="团队成员">
+                    </div>
+                    <h3>王明</h3>
+                    <p>首席开发</p>
+                    <div class="member-social">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-stack-overflow"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                
+                <div class="team-member fade-in">
+                    <div class="member-image">
+                        <img src="https://images.unsplash.com/photo-1569012871812-f38ee64cd54c?auto=format&fit=crop&w=400&q=80" alt="团队成员">
+                    </div>
+                    <h3>陈思</h3>
+                    <p>产品经理</p>
+                    <div class="member-social">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-medium"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系表单 -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>联系我们</h2>
+                <p>立即咨询我们的专业服务</p>
+            </div>
+            
+            <div class="contact-form fade-in">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="您的姓名" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="email" class="form-control" placeholder="电子邮箱" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="主题">
+                    </div>
+                    
+                    <div class="form-group">
+                        <textarea class="form-control" placeholder="您的需求" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn" style="width: 100%;">发送消息</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>创想科技</h3>
+                    <p>致力于通过技术创新帮助企业实现数字化转型与业务增长，成为您值得信赖的数字合作伙伴。</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>快速链接</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home"><i class="fas fa-chevron-right"></i> 首页</a></li>
+                        <li><a href="#services"><i class="fas fa-chevron-right"></i> 服务</a></li>
+                        <li><a href="#projects"><i class="fas fa-chevron-right"></i> 项目</a></li>
+                        <li><a href="#team"><i class="fas fa-chevron-right"></i> 团队</a></li>
+                        <li><a href="#contact"><i class="fas fa-chevron-right"></i> 联系</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>服务项目</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> 网站开发</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> 移动应用</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> 数字营销</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> UI/UX设计</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> 云服务</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>联系方式</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> 北京市朝阳区科技园A座15层</a></li>
+                        <li><a href="tel:+8612345678901"><i class="fas fa-phone"></i> +86 123 4567 8901</a></li>
+                        <li><a href="mailto:info@example.com"><i class="fas fa-envelope"></i> info@example.com</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 创想科技. 保留所有权利</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 导航栏功能
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // 滚动动画效果
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const fadeInOnScroll = () => {
+            fadeElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('appear');
+                }
+            });
+        };
+        
+        // 初始化函数
+        const init = () => {
+            window.addEventListener('scroll', fadeInOnScroll);
+            fadeInOnScroll(); // 初始检查
+            
+            // 平滑滚动
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        window.scrollTo({
+                            top: target.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                        
+                        // 移动端关闭菜单
+                        if (navLinks.classList.contains('active')) {
+                            navLinks.classList.remove('active');
+                        }
+                    }
+                });
+            });
+        };
+        
+        // 页面加载时初始化
+        window.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
